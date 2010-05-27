@@ -1,0 +1,165 @@
+/* 
+	How To Push
+	===========
+	A simple implementation of Pusher App for learning purposes
+
+	Copyright 2010, Tom Arnfeld.
+	
+*/
+
+body
+{
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica Neue", "Helvetica", "Tohama", "Arial";
+	background: #e4e4e4;
+	font-size: 14px;
+	line-height: 20px;
+}
+button, input[type=submit], input[type=button] {
+  background: url(button_bg.png) no-repeat top left;
+  border: none;
+  height: 24px;
+  padding: 0 0 2px 0;
+  width: 75px;
+  text-shadow: #264d7d 0px 1px 1px;
+  color: #ffffff;
+  cursor: pointer;
+  margin: 0;
+}
+button:disbled, input[type=submit]:disbled, input[type=button]:disbled {
+  cursor: default;
+  opacity: 0.5;
+}
+button:hover, input[type=submit]:hover, input[type=button]:hover { background-position-y: -24px; }
+input[type=submit], input[type=button] { background-position-y: -24px; }
+button:active, button:focus, input[type=submit]:focus, input[type=button]:focus, input[type=submit]:active, input[type=button]:active { background-position-y: -48px; }
+
+body .center
+{
+	width: 80%;
+	margin: 30px auto;
+	padding: 0;
+}
+body .center h1
+{
+	margin: 0;
+	padding: 0;
+	font-size: 22px;
+}
+body .center h1 .right
+{
+	margin: 0;
+	padding: 0;
+	float: right;
+	width: 150px;
+	text-align: right;
+}
+body .center h1 .right a
+{
+	text-decoration: none;
+	font-size: 15px;
+	color: #676767;
+	font-weight: normal;
+}
+body .center h1 .right a:hover
+{
+	color: #444444;
+}
+body .center .box
+{
+	padding: 0 10px;
+	background: #fff9c9;
+	margin: 10px 0;
+	border: 1px solid #dac000;
+}
+body .center .box p
+{
+	margin: 10px 0;
+	padding: 0;
+}
+body .center .pushes
+{
+	float: right;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+}
+body .center .pushes ul
+{
+	margin: 22px 0 0 0;
+	padding: 0;
+	width: 100%;
+}
+body .center .pushes ul li
+{
+	padding: 10px;
+	margin: 0 0 10px 0;
+	list-style-type: none;
+	background: #f0f0f0;
+	border: 1px solid #b9b9b9;
+	
+}
+body .center .pushes ul li .close
+{
+	width: 16px;
+	height: 16px;
+	float: right;
+	margin: -20px 5px 5px 5px;
+	background: url(close.png) transparent center center no-repeat;
+	cursor: pointer;
+	clear: both;
+}
+body .center .pushes ul li p
+{
+	margin: 0;
+	padding: 0;
+}
+body .center .pushes ul li .time
+{
+	font-weight: bold;
+	margin: 0 0 5px 0;
+}
+body .center .pushes ul li .title
+{
+	padding: 0 0 3px 0;
+	border-bottom: 1px #afafaf solid;
+	margin: 0 0 3px 0;
+}
+body .center .form
+{
+	float: left;
+	width: 50%;
+	background: transparent;
+	margin: 0;
+	padding: 0;
+}
+body .center .form p
+{
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+body .center .form p label
+{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	font-size: 15px;
+}
+body .center .form p input[type=text]
+{
+	margin: 5px 0 0 0;
+	padding: 10px;
+	width: 90%;
+	font-size: 16px;
+}
+body .center .form p textarea
+{
+	-webkit-appearance: textfield;
+	width: 90%;
+	padding: 10px;
+	font-size: 16px;
+	max-width: 90%;
+	min-width: 90%;
+	min-height: 90px;
+}
