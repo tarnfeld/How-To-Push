@@ -1,7 +1,31 @@
 $(document).ready(function(){
 	
-	// Make a socket connection with your PusherApp API Key and channel
-	var socket = new Pusher(YOUR_API_KEY_HERE, 'test_channel');
+	// Logging, don't enable in production environments
+	Pusher.log = function() {
+      if (window.console) window.console.log.apply(window.console, arguments);
+    };
+	
+	// Make a Pusher connection with your PusherApp API Key and channel
+	var socket = new Pusher("b5bce1a78e6d2d0067b0");
+	socket.auth_url = '/presence_auth.php';
+	
+	// Presence Stuff
+	var Pusher_Presence = socket.subscribe('test_channel');
+	Pusher_Presence.bind('pusher:subscription_succeeded', function(member_list){
+	
+		console.log("Members: " + member_list);
+	
+	});
+	Pusher_Presence.bind('pusher:member_added', function(member){
+	
+		console.log("Added: " + member);
+	
+	});
+	Pusher_Presence.bind('pusher:member_removed', function(member){
+	
+		console.log("Removed: " + member);
+	
+	});
 	
 	// Subscribe to a specific type of event
 	socket.bind('test_event',function(data)
@@ -15,6 +39,7 @@ $(document).ready(function(){
 		// Slide the item in
 		$('.new').slideDown();
 		$('.new').removeClass('new');
+		
 	});
 	
 	$('#eventButton').click(function()
@@ -45,12 +70,8 @@ $(document).ready(function(){
 	
 	$('.close').live('click',function()
 	{
-		var answer = confirm("Are you sure you want to delete this event?");
-		if(answer)
-		{
-			$(this).parent('li').slideUp();
-			setTimeout("$(this).parent('li').remove();",300);
-		}
+		$(this).parent('li').slideUp();
+		setTimeout("$(this).parent('li').remove();",300);
 	});
 
 });

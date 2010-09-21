@@ -1,0 +1,3 @@
+[submodule "Pusher-PHP"]
+	path = Pusher-PHP
+	url = git://github.com/maxthelion/Pusher-PHP.git
