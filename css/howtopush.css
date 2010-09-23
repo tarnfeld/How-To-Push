@@ -3,7 +3,8 @@
 	===========
 	A simple implementation of Pusher App for learning purposes
 
-	Copyright 2010, Tom Arnfeld.
+	Copyright 2010, Tom Arnfeld. With a little help from Max Williams at @pusherapp!
+	http://github.com/tarnfeld/How-To-Push
 	
 */
 
@@ -16,6 +17,7 @@ body
 	font-size: 14px;
 	line-height: 20px;
 }
+
 button, input[type=submit], input[type=button] {
   background: url(button_bg.png) no-repeat top left;
   border: none;
@@ -27,10 +29,12 @@ button, input[type=submit], input[type=button] {
   cursor: pointer;
   margin: 0;
 }
+
 button:disbled, input[type=submit]:disbled, input[type=button]:disbled {
   cursor: default;
   opacity: 0.5;
 }
+
 button:hover, input[type=submit]:hover, input[type=button]:hover { background-position-y: -24px; }
 input[type=submit], input[type=button] { background-position-y: -24px; }
 button:active, button:focus, input[type=submit]:focus, input[type=button]:focus, input[type=submit]:active, input[type=button]:active { background-position-y: -48px; }
@@ -82,7 +86,7 @@ body .center .pushes
 {
 	float: right;
 	width: 50%;
-	margin: 0;
+	margin: 25px 0 0 0;
 	padding: 0;
 }
 body .center .pushes ul
@@ -162,4 +166,21 @@ body .center .form p textarea
 	max-width: 90%;
 	min-width: 90%;
 	min-height: 90px;
+}
+body #members
+{
+	clear: both;
+	margin: 0 0 20px 0;
+}
+body #members .member span
+{
+	font-weight: bold;
+}
+body #members .member
+{
+	padding: 10px;
+	background: #E9E9E9;
+	border: 1px solid #C8C8C8;
+	float: left;
+	margin: 0 10px 10px 0;
 }

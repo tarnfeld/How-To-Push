@@ -1,3 +1,14 @@
+
+/* 
+	How To Push
+	===========
+	A simple implementation of Pusher App for learning purposes
+
+	Copyright 2010, Tom Arnfeld. With a little help from Max Williams at @pusherapp!
+	http://github.com/tarnfeld/How-To-Push
+	
+*/
+
 $(document).ready(function(){
 	
 	// Logging, don't enable in production environments
@@ -5,32 +16,41 @@ $(document).ready(function(){
       if (window.console) window.console.log.apply(window.console, arguments);
     };
 	
-	// Make a Pusher connection with your PusherApp API Key and channel
-	Pusher.channel_auth_endpoint = '/presence/presence_auth.php';
-	var socket = new Pusher(YOUR_PUBLIC_KEY);
+	// Make a Pusher connection with your PusherApp API Key
+	Pusher.channel_auth_endpoint = './presence_auth.php';
+	var socket = new Pusher('YOUR_PUSHER_API_KEY');
 
 	
-	// Presence Stuff
+	// Presence Stuff - Subscribe to the channel
 	var presenceChannel = socket.subscribe('presence-test_channel');
+	
+	// When the presence subscription successeded, get a list of the members currently attached to the channel and added them.
 	presenceChannel.bind('pusher:subscription_succeeded', function(member_list){
 	  $('#members').empty();
-		for (var i=0; i < member_list.length; i++) {
-		  addMember(member_list[i]);
+		for (var i = 0; i < member_list.length; i++) {
+			var p = $('<p>', { html: "<span>UserID: </span>" + member_list[i].user_id, id: 'member_' + member_list[i].user_id, "class": 'member', "style": 'display:none;' } );
+			$('#members').append(p);
+			$('#member_' + member_list[i].user_id).slideDown();
+			
 		};
 	});
+	
+	// Bind an event to slide down and show a member who has been added
 	presenceChannel.bind('pusher:member_added', function(member){
-    addMember(member);
+		
+    	var p = $('<p>', { html: "<span>UserID: </span>" + member.user_id, id: 'member_' + member.user_id, "class": 'member', "style": 'display:none;' } );
+		$('#members').append(p);
+		$('#member_' + member.user_id).slideDown();
+		
 	});
+	
+	// Bind an event to slide up a member and remove them
 	presenceChannel.bind('pusher:member_removed', function(member){
-		removeMember(member)
+		
+		$('#member_'+ member.user_id).slideUp(200);
+		setTimeout(function(){$('#member_'+ member.user_id).remove();}, 200);
+		
 	});
-	function addMember(member){
-	  var p = $('<p>', { text: member.user_info.id, id: 'member_' + member.user_id } );
-	  $('#members').append( p );
-	}
-	function removeMember(member){
-	  $('#member_'+ member.user_id).remove()
-	}
 	
 	// Subscribe to a specific type of event
 	socket.bind('test_event',function(data)
@@ -47,6 +67,7 @@ $(document).ready(function(){
 		
 	});
 	
+	// Blue button click
 	$('#eventButton').click(function()
 	{
 		// Get the title and contents of the event
@@ -62,17 +83,18 @@ $(document).ready(function(){
 		else
 		{
 			// Send a POST request to the file ajax/send.php carrying the title and content
-			$.post('ajax/send.php', { title:title, content:content }, function(data)
+			$.post('./ajax/send.php', { "title":title, "content":content }, function(data)
 			{
 				if(data != 1)
 				{
 					// If the send.php file doesn't echo the number 1 onto the page to signify it all went well, alert the user there was an error, for the developer to debug
-					alert('There was an error pushing your event!');
+					alert("There was an error pushing your event:\n\n" + data);
 				}
 			});
 		}
 	});
 	
+	// [X] button clicked slides up the notification
 	$('.close').live('click',function()
 	{
 		$(this).parent('li').slideUp();

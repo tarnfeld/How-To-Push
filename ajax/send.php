@@ -1,29 +1,25 @@
 <?php
 
-	date_default_timezone_set('Europe/London');
-
 /* 
 	How To Push
 	===========
 	A simple implementation of Pusher App for learning purposes
 
-	Copyright 2010, Tom Arnfeld.
+	Copyright 2010, Tom Arnfeld. With a little help from Max Williams at @pusherapp!
+	http://github.com/tarnfeld/How-To-Push
 	
 */
+
+	date_default_timezone_set('Europe/London');
 
 	if($_POST)
 	{
 
 		// Include Pusher Library
-		require_once('../lib/Pusher.php');
-		
-		// Security Credentials (These are obtained from pusherapp.com)
-		$api_key = YOUR_API_KEY_HERE;
-		$api_secret = YOUR_API_SECRET_HERE;
-		$app_id = YOUR_APP_ID_HERE;
+		require_once('../pusher_info.php');
 		
 		// Settings
-		$channel = 'test_channel'; // Channel Name
+		$channel = 'presence-test_channel';
 		$event = 'test_event'; // Type of event
 		
 		// Trigger Content
@@ -33,18 +29,11 @@
 						'time'=>date('jS M, Y \a\t g:i a',time())
 					);
 		
-		// Creating a connection to Pusher
-		$pusher = new Pusher($api_key, $api_secret, $app_id, $channel);
-		
-		// $pusher = new Pusher($api_key, $api_secret, $app_id, $channel, [Debug: true/false, HOST, PORT]);
-		// Use this when debugging a whole pusher connection
-		
 		// Trigger a pusher event to the client with your content
-		$pusher->trigger($event, $content);
+		$_pusher->trigger($channel, $event, $content);
 		
-		// $pusher->trigger($event, $channel, true);
-		// Use this to turn on debugging for a specifc trigger
-		
+		// For Debugging:
+		// var_dump($_pusher->trigger($channel, $event, $content, null, true)); die();
 		
 		// Echo onto the page to tell the AJAX script that nothing went wrong
 		echo(1);
